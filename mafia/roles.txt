@@ -1,0 +1,10 @@
+god-father mafia
+mafioso 1 mafia
+mafioso 2 mafia
+detective
+doctor
+vigilante
+villager 1
+villager 2
+villager 3
+villager 4
