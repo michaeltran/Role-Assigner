@@ -1,0 +1,9 @@
+mayor 1
+seer 1
+apprentice 1
+thing 1
+werewolf 1
+werewolf 2
+villager 1
+villager 2
+villager 3

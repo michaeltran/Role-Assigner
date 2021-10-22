@@ -1,9 +1,9 @@
 var http = require('http'); // Import Node.js core module
 var fs = require("fs");
 
-var gameName = 'mafia';
+var gameName = 'werewords';
 var gameId = getRandomInt(1000);
-var defaultRole = 'civilian';
+var defaultRole = 'villager';
 
 var rolesText = fs.readFileSync(`./${gameName}/roles.txt`, "utf-8");
 var roles = rolesText.split("\n")
@@ -25,13 +25,16 @@ var server = http.createServer(function (req, res) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         addFavicon(res);
         res.write('<html><body><p>');
+        res.write('<meta http-equiv="refresh" content="5" >');
         res.write(`<h1>Admin Page - (${players.size})</h1>`);
         printGameHeader(res);
+        res.write('<hr>');
         for (let [key, value] of players) {
             res.write(`<b>Name</b>: ${value['name']} <br>`);
             res.write(`<b>Value</b>: ${value['role']} <br>`);
             res.write(`<b>IP</b>: ${value['ip']} <br>`);
-            res.write('<br>')
+            res.write('<b>Description</b>: <br>' + getRoleDescription(value['role']));
+            res.write('<br><br>')
         }
         res.write('<hr>');
         res.write('<h2>DEBUG</h2>');
@@ -47,7 +50,7 @@ var server = http.createServer(function (req, res) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         addFavicon(res);
         res.write('<html><body><p>');
-        res.write(`<h1>Register Page - (${players.size})</h1>`);
+        res.write(`<h1>Register Page</h1>`);
         res.write('<label for="name">Name:</label>');
         res.write('<input type="text" id="name" name="name"><br><br>');
         res.write('<button onclick="onClickButton()">Submit</button>');
@@ -89,13 +92,18 @@ var server = http.createServer(function (req, res) {
             res.writeHead(200, { 'Content-Type': 'text/html' });
             addFavicon(res);
             res.write('<html><body><p>');
+            res.write('<meta http-equiv="refresh" content="10" >');
+            res.write(`<h1>Player Page</h1>`);
             printGameHeader(res);
+            res.write('<hr>');
             res.write('<b>Name</b>: ' + player.name);
             res.write('<br>');
             res.write('<b>Role</b>: ' + player.role);
             res.write('<br>');
             res.write('<b>Description</b>: <br>' + getRoleDescription(player.role));
             res.write('<br>');
+            res.write('<hr>');
+            res.write('Roles: ' + JSON.stringify(roles));
             res.write('</p></body></html>');
             res.end();
         }
@@ -118,7 +126,6 @@ function printGameHeader(res) {
     res.write('<br>');
     res.write('<b>GameId</b>: ' + gameId);
     res.write('<br>');
-    res.write('<hr>')
 }
 
 function getRandomInt(max) {
