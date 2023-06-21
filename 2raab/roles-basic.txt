@@ -1,0 +1,8 @@
+president blue
+basic 1 blue
+basic 2 blue
+basic 3 blue
+bomber red
+basic 1 red
+basic 2 red
+basic 3 red
