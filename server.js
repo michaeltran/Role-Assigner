@@ -2,7 +2,7 @@ var http = require("http"); // Import Node.js core module
 var fs = require("fs");
 
 var gameName = "2raab";
-var defaultRole = "basic";
+var defaultRole = "grey-gambler";
 
 // var gameName = 'werewords';
 // var defaultRole = 'villager';
@@ -10,6 +10,8 @@ var defaultRole = "basic";
 var gameId = getRandomInt(1000);
 
 var rolesText = fs.readFileSync(`./${gameName}/roles.txt`, "utf-8");
+// \r\n for windows
+// \n for linux
 var roles = rolesText.split("\n");
 var usedRoles = [];
 var players = new Map();
@@ -40,13 +42,13 @@ var server = http.createServer(function (req, res) {
       res.write(`<b>Value</b>: ${value["role"]} <br>`);
       res.write(`<b>IP</b>: ${value["ip"]} <br>`);
       res.write("<b>Description</b>: <br>" + getRoleDescription(value["role"]));
-      res.write("<br><br>");
+      res.write("<br>------<br>");
     }
     res.write("<hr>");
     res.write("<h2>DEBUG</h2>");
-    res.write("Roles: " + JSON.stringify(roles));
+    res.write("Roles: " + JSON.stringify(roles, null, 2));
     res.write("<br>");
-    res.write("Used Roles: " + JSON.stringify(usedRoles));
+    res.write("Used Roles: " + JSON.stringify(usedRoles, null, 2));
     res.write("<br>");
     res.write("");
     res.write("</p></body></html>");
@@ -111,7 +113,7 @@ var server = http.createServer(function (req, res) {
       res.write("<b>Description</b>: <br>" + getRoleDescription(player.role));
       res.write("<br>");
       res.write("<hr>");
-      res.write("Roles: " + JSON.stringify(roles));
+      res.write("Roles: " + JSON.stringify(roles, null, 2));
       res.write("</p></body></html>");
       res.end();
     }

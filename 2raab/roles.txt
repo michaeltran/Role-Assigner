@@ -1,8 +1,15 @@
-president blue
-basic 1 blue
-basic 2 blue
-basic 3 blue
-bomber red
-basic 1 red
-basic 2 red
-basic 3 red
+blue-president
+blue-doctor
+blue-spy
+blue-coyboy
+blue-negotiator
+blue-player 1
+blue-player 2
+red-bomber
+red-engineer
+red-spy
+red-coyboy
+red-negotiator
+red-player 1
+red-player 2
+grey-gambler
